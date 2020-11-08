@@ -1,0 +1,13 @@
+{
+  "name": "cypress-zap",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "test": "cypress open",
+    "test:ci": "cypress run"
+  },
+  "dependencies": {
+    "cypress": "^5.5.0"
+  }
+}
