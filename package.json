@@ -4,10 +4,13 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "test": "cypress open",
-    "test:ci": "cypress run"
+    "test": "cross-env HTTP_PROXY=http://localhost:8080 NO_PROXY=\"<-loopback>\" cypress open",
+    "test:ci": "cross-env HTTP_PROXY=http://localhost:8080 NO_PROXY=\"<-loopback>\" cypress run",
+    "run:zap:daemon": "java -jar ./zap/zap-2.9.0.jar -daemon -port 8080 -config api.addrs.addr.regex=true -config api.disablekey=true -newsession ${PWD}/zap-results/session",
+    "run:zap:report": "java -jar ./zap/zap-2.9.0.jar -last_scan_report ${PWD}/report.html -session ${PWD}/zap-results/session -cmd"
   },
   "dependencies": {
+    "cross-env": "^7.0.2",
     "cypress": "^5.5.0"
   }
 }
