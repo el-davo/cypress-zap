@@ -6,7 +6,7 @@ This is an example of showing how cypress can be used to automate ZAP attack pro
 
 ### How do I run this?
 
-Start the example website to be attacked by running the following command
+Start the example website to be attacked by running the following command. *Note* this is only for demo purposes
 
 ```
 docker-compose up
@@ -21,7 +21,7 @@ yarn test
 yarn test:ci
 ```
 
-The first command will open the cypress user interface so you can see your tests running (Note you will have to exit the UI to see the scan results). 
+The first command will open the cypress user interface so you can see your tests running (*Note* you will have to exit the UI to see the scan results). 
 The second command is intended for running on continuous integration servers where a user interface is not required.
 
 ### How do I see the results?
