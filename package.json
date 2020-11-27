@@ -12,8 +12,8 @@
     "cypress:run": "npm run clean && npm run wait && cross-env HTTP_PROXY=http://localhost:8080 NO_PROXY=\"<-loopback>\" cypress run && npm run wait",
     "wait": "node wait",
     "clean": "rimraf zap-results",
-    "zap:daemon": "java -jar ./zap/zap-2.9.0.jar -daemon -port 8080 -config api.addrs.addr.regex=true -config api.disablekey=true -newsession ${PWD}/zap-results/session",
-    "zap:report": "java -jar ./zap/zap-2.9.0.jar -last_scan_report ./report.html -session ${PWD}/zap-results/session -cmd"
+    "zap:daemon": "java -jar ./zap/zap-2.9.0.jar -daemon -port 8080 -config api.addrs.addr.regex=true -config api.disablekey=true -newsession ./zap-results/session",
+    "zap:report": "java -jar ./zap/zap-2.9.0.jar -last_scan_report ./report.html -session ./zap-results/session -cmd"
   },
   "dependencies": {
     "cross-env": "^7.0.2",
