@@ -4,13 +4,24 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "test": "cross-env HTTP_PROXY=http://localhost:8080 NO_PROXY=\"<-loopback>\" cypress open",
-    "test:ci": "cross-env HTTP_PROXY=http://localhost:8080 NO_PROXY=\"<-loopback>\" cypress run",
-    "run:zap:daemon": "java -jar ./zap/zap-2.9.0.jar -daemon -port 8080 -config api.addrs.addr.regex=true -config api.disablekey=true -newsession ${PWD}/zap-results/session",
-    "run:zap:report": "java -jar ./zap/zap-2.9.0.jar -last_scan_report ${PWD}/report.html -session ${PWD}/zap-results/session -cmd"
+    "test": "concurrently -k -r -s first \"npm:zap:daemon\" \"npm:cypress:open\"",
+    "test:ci": "concurrently -k -r -s first \"npm:zap:daemon\" \"npm:cypress:run\"",
+    "posttest": "npm run zap:report && npm run clean",
+    "posttest:ci": "npm run zap:report && npm run clean",
+    "cypress:open": "npm run clean && npm run wait && cross-env HTTP_PROXY=http://localhost:8080 NO_PROXY=\"<-loopback>\" cypress open && npm run wait",
+    "cypress:run": "npm run clean && npm run wait && cross-env HTTP_PROXY=http://localhost:8080 NO_PROXY=\"<-loopback>\" cypress run && npm run wait",
+    "wait": "node wait",
+    "clean": "rimraf zap-results",
+    "zap:daemon": "java -jar ./zap/zap-2.9.0.jar -daemon -port 8080 -config api.addrs.addr.regex=true -config api.disablekey=true -newsession ${PWD}/zap-results/session",
+    "zap:report": "java -jar ./zap/zap-2.9.0.jar -last_scan_report ${PWD}/report.html -session ${PWD}/zap-results/session -cmd"
   },
   "dependencies": {
     "cross-env": "^7.0.2",
     "cypress": "^5.5.0"
+  },
+  "devDependencies": {
+    "concurrently": "^5.3.0",
+    "node-fetch": "^2.6.1",
+    "rimraf": "^3.0.2"
   }
 }
