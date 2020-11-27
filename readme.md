@@ -12,6 +12,12 @@ Start the example website to be attacked by running the following command. *Note
 docker-compose up
 ``` 
 
+Install dependencies with the command below
+
+```
+yarn install
+```
+
 To run the cypress tests use one of the commands below
 
 ```
